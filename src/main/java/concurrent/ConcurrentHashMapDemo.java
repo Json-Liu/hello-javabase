@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /***
  ** @Author JosonLiu
@@ -16,5 +17,9 @@ import java.util.Set;
 public class ConcurrentHashMapDemo {
 	public static void main(String[] args) {
 		System.out.println(System.currentTimeMillis());
+	}
+	private static void test(){
+		Map<String, Integer> map = new ConcurrentHashMap<>();
+		map.get("1");
 	}
 }
