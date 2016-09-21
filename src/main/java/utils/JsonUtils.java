@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  **/
 public class JsonUtils {
 	private static final ObjectMapper mapper = new ObjectMapper();
+	public static ObjectMapper getObjectMapper(){
+		return mapper;
+	}
 	public static <T> T strToObj(String jsonStr, Class<T> type) {
 		try {
 			return mapper.readValue(jsonStr, type);

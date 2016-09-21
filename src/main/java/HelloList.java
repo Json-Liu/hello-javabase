@@ -20,8 +20,19 @@ import com.google.common.collect.Lists;
 public class HelloList {
     public static void main(String[] args){
 /*    	test_GetSubList();*/
+    	test_Remove();
+    	
+    }
+    public static void test_Remove(){
+    	List<Long> uids = Lists.newArrayList(50075120L,50075121L,50075122L,50075123L);
+    	Long uid = 50075120L;
+    	uids.remove(uid);
+    	System.out.println(uids.size());
     }
 	private static void test_GetSubList() {
+		test_subList();
+	}
+	private static void test_subList() {
 		HelloList helloList = new HelloList();
     	List<Integer> list = Lists.newArrayList(1,2,3,4,5,6,7,8,9,10);
     	List<Integer> sublist = helloList.getSublist(list, 1, 2);
