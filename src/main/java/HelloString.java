@@ -1,3 +1,4 @@
+import org.springframework.util.Assert;
 /**
  * 字符串的一些常见用法：获取字符串长度，判断开头结尾、指定字符串格式、字符串分割、字符串大小写转换、子字符串获取与判定、字符串与正则表达式的匹配、基础类型转换为字符串的方法 等
  * @author JosonLiu
@@ -5,7 +6,47 @@
  */
 public class HelloString {
     public static void main(String[] args){
-        String testStr1 = "Hello World";
+        testSubString();
+        testStrImmutable();
+        testIntern();
+        defaultTest();
+    }
+    /**
+     * 测试字符串的内部化引用 方法
+     */
+    private static void testIntern(){
+    	String str1 = "abc";
+    	String str2 = new String("abc");
+    	//因为 str2 是通过构造函数创建的，所以会重新创建并分配内存而不是共用
+    	Assert.isTrue(str1 != str2);
+    	//内部引用化 如果字符串已经存在则返回它的引用 ，否则重新创建 
+    	String str3 = "abcd";
+    	String str4 = new String("abcd").intern();
+    	Assert.isTrue(str3 == str4);
+    }
+    /**
+     * 测试字符串的不可变性
+     */
+    private static void testStrImmutable(){
+    	String str1 = "abc";
+    	String str2 = "abc";
+    	Assert.isTrue(str1.equals(str2), "str1 与 str2 拥有不同的内容");
+    	Assert.isTrue(str1 == str2, "str1 与 str2 拥有不同的引用");
+    }
+    /**
+     * 测试子串的实现机制
+     */
+    private static void testSubString(){
+    	String orginStr = "abcdefg";
+    	String compareStr = "abc";
+    	//子串不包含 endIndex位置的字符
+    	String substring = orginStr.substring(0, 3);
+    	Assert.isTrue(compareStr.equals(substring)," compareStr:"+compareStr+" -> subStr: "+substring);
+    	//JAVA7 中的子串是返回一个新创建的字符串对象
+    	Assert.isTrue(compareStr != substring," compareStr:"+compareStr+" -> subStr: "+substring);
+    }
+	private static void defaultTest() {
+		String testStr1 = "Hello World";
         System.out.println("String length:"+testStr1.length());//获取字符串长度
         System.out.println("lastIndexof:o :"+testStr1.lastIndexOf('o'));//获取字符串中最后出现某一字符的位置，没有时返回 －1
         System.out.println("startsWith He:"+testStr1.startsWith("He"));//判断字符串是否以某一字符串开头
@@ -30,5 +71,5 @@ public class HelloString {
         System.out.println(" replace :"+result.replaceAll("World", "Java"));//替换字符串中的World为Java
         String testStr4 = "";
         System.out.println("testStr4:"+testStr4.isEmpty());//判断字符串是否为空
-    }
+	}
 }
